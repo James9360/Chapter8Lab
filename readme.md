@@ -4,9 +4,16 @@
 
 Write a method that accepts a String object as an argument and returns a copy of the string with first character of each sentence capitalized. For instance, if the argument is "hello. my name is Joe. what is your name?" the method should return the string, "Hello. My name is Joe. What is your name?" Demonstrate the method in a program (written in the main method of edu.carrollcc.cis232.Question1) that asks the user to input a string and then passes it to the method. The modified string should be displayed on the screen.  Make sure to at least handle periods, question marks, and exclamation marks as sentence endings.
 
+**Points breakdown**
+
+- Technical: 25 points
+- Style: 10 points
+- Total: 35 points
+
+-----
 ## Question 2: Check Writer
 
-Write a program that displays the amount that should be written on a check. The program should ask the user to enter an amount in decimal format. It should then display the amount in English to be written on a check.
+Write a program (in the main method of edu.carrollcc.cis232.Question2) that displays the amount that should be written on a check. The program should ask the user to enter an amount in decimal format. It should then display the amount in English to be written on a check.
 
 For example, if the user enters `1920.85`, the program should display:
 
@@ -26,7 +33,14 @@ Use [this guide](http://www.eslcafe.com/grammar/saying_large_numbers01.html) for
 
 The program should work for values up to and including one million.
 
-### a refresh on how to submit the lab
+**Points breakdown**
+
+- Technical: 25 points
+- Style: 10 points
+- Total: 35 points
+
+----
+### How to submit the lab
 This section outlines how to get the lab on to your computer and how to submit it.
 
 1. Fork the Chapter 8 lab repository
