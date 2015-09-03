@@ -52,11 +52,11 @@ public class Question1Test {
         assertThat(output, matchesPattern("(?m).*\n?Why do they call it hyper text\\? Too much JAVA\\.\n?$"));
 	}
 	
-	@Test
+	
 	/**
 	 * Ensures the code handles ! as a sentence ender
 	 */
-	public void testWithExclamationMark() {
+	@Test public void testWithExclamationMark() {
 		systemInMock.provideText("hey! you're looking at this! wow!");
     	Question1.main(null);
     	String output = systemOutRule.getLogWithNormalizedLineSeparator();

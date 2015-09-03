@@ -11,6 +11,8 @@ import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
 
 public class Question2Test {
 
+	private static final String RX_INVALID_AMOUNT = "(?smiu).*\n?invalid amount.*\n?$";
+
 	@Rule
     public final TextFromStandardInputStream systemInMock= emptyStandardInputStream();
 
@@ -27,7 +29,7 @@ public class Question2Test {
         systemInMock.provideText("0");
     	Question2.main(null);
     	String output = systemOutRule.getLogWithNormalizedLineSeparator();
-        assertThat(output, matchesPattern("(?smiu).*\n?invalid amount\n?$"));
+        assertThat(output, matchesPattern(RX_INVALID_AMOUNT));
     }
     
     @Test
@@ -39,7 +41,7 @@ public class Question2Test {
         systemInMock.provideText("-10");
     	Question2.main(null);
     	String output = systemOutRule.getLogWithNormalizedLineSeparator();
-        assertThat(output, matchesPattern("(?smiu).*\n?invalid amount\n?$"));
+        assertThat(output, matchesPattern(RX_INVALID_AMOUNT));
     }
     
     @Test
@@ -51,7 +53,7 @@ public class Question2Test {
         systemInMock.provideText("1");
     	Question2.main(null);
     	String output = systemOutRule.getLogWithNormalizedLineSeparator();
-        assertThat(output, matchesPattern("(?smiu).*\n?one and no cents\n?$"));
+        assertThat(output, matchesPattern("(?smiu).*\n?one and (no|00?) cents\n?$"));
     }
     
     @Test
@@ -63,7 +65,7 @@ public class Question2Test {
         systemInMock.provideText(".01");
     	Question2.main(null);
     	String output = systemOutRule.getLogWithNormalizedLineSeparator();
-        assertThat(output, matchesPattern("(?smiu).*\n?1 cent\n?$"));
+        assertThat(output, matchesPattern("(?smiu).*\n?0?1 cent\n?$"));
     }
     
     @Test
@@ -87,7 +89,7 @@ public class Question2Test {
         systemInMock.provideText("100.00");
     	Question2.main(null);
     	String output = systemOutRule.getLogWithNormalizedLineSeparator();
-        assertThat(output, matchesPattern("(?smiu).*\n?one hundred and no cents\n?$"));
+        assertThat(output, matchesPattern("(?smiu).*\n?one hundred and (no|00?) cents\n?$"));
     }
     
     @Test
@@ -99,7 +101,7 @@ public class Question2Test {
         systemInMock.provideText("1000.00");
     	Question2.main(null);
     	String output = systemOutRule.getLogWithNormalizedLineSeparator();
-        assertThat(output, matchesPattern("(?smiu).*\n?one thousand and no cents\n?$"));
+        assertThat(output, matchesPattern("(?smiu).*\n?one thousand and (no|00?) cents\n?$"));
     }
 	
     @Test
@@ -111,7 +113,7 @@ public class Question2Test {
         systemInMock.provideText("1000000.00");
     	Question2.main(null);
     	String output = systemOutRule.getLogWithNormalizedLineSeparator();
-        assertThat(output, matchesPattern("(?smiu).*\n?one million and no cents\n?$"));
+        assertThat(output, matchesPattern("(?smiu).*\n?one million and (no|00?) cents\n?$"));
     }
     
     @Test
@@ -128,7 +130,7 @@ public class Question2Test {
     
     @Test
     /**
-	 * Ensures the code can handle a large number
+	 * Ensures the code can handle a large number with hyphens
 	 */
     public void testALotOfHyphens()
     {
@@ -136,5 +138,29 @@ public class Question2Test {
     	Question2.main(null);
     	String output = systemOutRule.getLogWithNormalizedLineSeparator();
         assertThat(output, matchesPattern("(?smiu).*\n?thirty-one thousand twenty-one and 99 cents\n?$"));
+    }
+    
+    @Test
+    /**
+	 * Ensures the code can handle invalid input
+	 */
+    public void testNonNumber()
+    {
+        systemInMock.provideText("hi");
+    	Question2.main(null);
+    	String output = systemOutRule.getLogWithNormalizedLineSeparator();
+    	assertThat(output, matchesPattern(RX_INVALID_AMOUNT));
+    }
+    
+    @Test
+    /**
+	 * Ensures the code can handle 0s appended ot the end of the cents
+	 */
+    public void testExtraZeroes()
+    {
+        systemInMock.provideText("123.23000000");
+    	Question2.main(null);
+    	String output = systemOutRule.getLogWithNormalizedLineSeparator();
+    	assertThat(output, matchesPattern("(?smiu).*\n?one hundred twenty-three and 23 cents\n?$"));
     }
 }
