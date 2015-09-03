@@ -23,7 +23,7 @@ Another example, if the user enters `100000`, the program should display:
 
 `One hundred thousand and no cents`
 
-If the user enters a `0` or a negative number, the program should display:
+If the user enters a `0`, a negative number, a non-number, or more than 2 decimal places the program should display:
 
 `Invalid amount`
 
