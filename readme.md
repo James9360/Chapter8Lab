@@ -1,4 +1,5 @@
 # Lab #1: Chapter 8
+**Due:** September 15th by 6:30 PM
 
 ## Question 1: Sentence Capitalizer
 
