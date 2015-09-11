@@ -27,7 +27,7 @@ public class Question1Test {
         systemInMock.provideText("hello");
     	Question1.main(null);
     	String output = systemOutRule.getLogWithNormalizedLineSeparator();
-        assertThat(output, matchesPattern("(?m).*\n?Hello\n?$"));
+        assertThat(output, matchesPattern("(?sm).*\n?Hello\n?$"));
     }
 	
 	@Test
@@ -38,7 +38,7 @@ public class Question1Test {
 		systemInMock.provideText("most people believe that if it ain't broke, don't fix it. engineers believe that if it ain't broke, it doesn't have enough features yet.");
     	Question1.main(null);
     	String output = systemOutRule.getLogWithNormalizedLineSeparator();
-        assertThat(output, matchesPattern("(?m).*\n?Most people believe that if it ain't broke, don't fix it\\. Engineers believe that if it ain't broke, it doesn't have enough features yet\\.\n?$"));
+        assertThat(output, matchesPattern("(?sm).*\n?Most people believe that if it ain't broke, don't fix it\\. Engineers believe that if it ain't broke, it doesn't have enough features yet\\.\n?$"));
 	}
 	
 	@Test
@@ -49,7 +49,7 @@ public class Question1Test {
 		systemInMock.provideText("why do they call it hyper text? too much JAVA.");
     	Question1.main(null);
     	String output = systemOutRule.getLogWithNormalizedLineSeparator();
-        assertThat(output, matchesPattern("(?m).*\n?Why do they call it hyper text\\? Too much JAVA\\.\n?$"));
+        assertThat(output, matchesPattern("(?sm).*\n?Why do they call it hyper text\\? Too much JAVA\\.\n?$"));
 	}
 	
 	
@@ -60,7 +60,7 @@ public class Question1Test {
 		systemInMock.provideText("hey! you're looking at this! wow!");
     	Question1.main(null);
     	String output = systemOutRule.getLogWithNormalizedLineSeparator();
-        assertThat(output, matchesPattern("(?m).*\n?Hey! You're looking at this! Wow!\n?$"));
+        assertThat(output, matchesPattern("(?sm).*\n?Hey! You're looking at this! Wow!\n?$"));
 	}
 	
 
