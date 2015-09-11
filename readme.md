@@ -1,4 +1,5 @@
 # Lab #1: Chapter 8
+**Due:** September 15th by 6:30 PM
 
 ## Question 1: Sentence Capitalizer
 
@@ -56,6 +57,7 @@ This section outlines how to get the lab on to your computer and how to submit i
 	9. Choose a local destination directory and press Next
 	10. Select "Import existing Eclipse project" (should be default choice), press Next.
 	11. Press Finish and your project is imported!
+	12. Right click the project in the package explorer, click Maven->Update Project... (Or press Alt+F5)
 3. Do the actual lab work
 	1. Read/implement the Question1 and Question2 sections above
 5. Test your work.
