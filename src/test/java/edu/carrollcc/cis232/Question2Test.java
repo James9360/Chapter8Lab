@@ -1,11 +1,12 @@
 package edu.carrollcc.cis232;
 
 import static com.jcabi.matchers.RegexMatchers.matchesPattern;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import static org.junit.contrib.java.lang.system.TextFromStandardInputStream.emptyStandardInputStream;
 
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.contrib.java.lang.system.ExpectedSystemExit;
 import org.junit.contrib.java.lang.system.SystemOutRule;
 import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
 
@@ -18,18 +19,22 @@ public class Question2Test {
 
     @Rule
 	public final SystemOutRule systemOutRule = new SystemOutRule().enableLog();
+    
+    @Rule
+    public final ExpectedSystemExit exit = ExpectedSystemExit.none();
 
     
     @Test
     /**
 	 * Ensures the code can handle a 0 to show "invalid amount"
 	 */
-    public void testZeroDollars()
-    {
+    public void testZeroDollars(){
+    	exit.expectSystemExit();
         systemInMock.provideText("0");
     	Question2.main(null);
     	String output = systemOutRule.getLogWithNormalizedLineSeparator();
         assertThat(output, matchesPattern(RX_INVALID_AMOUNT));
+        System.exit(0);
     }
     
     @Test
@@ -38,10 +43,12 @@ public class Question2Test {
 	 */
     public void testNegativeAmount()
     {
+    	exit.expectSystemExit();
         systemInMock.provideText("-10");
     	Question2.main(null);
     	String output = systemOutRule.getLogWithNormalizedLineSeparator();
         assertThat(output, matchesPattern(RX_INVALID_AMOUNT));
+        System.exit(0);
     }
     
     @Test
@@ -146,15 +153,17 @@ public class Question2Test {
 	 */
     public void testNonNumber()
     {
+    	exit.expectSystemExit();
         systemInMock.provideText("hi");
     	Question2.main(null);
     	String output = systemOutRule.getLogWithNormalizedLineSeparator();
     	assertThat(output, matchesPattern(RX_INVALID_AMOUNT));
+    	System.exit(0);
     }
     
     @Test
     /**
-	 * Ensures the code can handle 0s appended ot the end of the cents
+	 * Ensures the code can handle 0s appended to the end of the cents
 	 */
     public void testExtraZeroes()
     {
