@@ -12,7 +12,7 @@ import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
 
 public class Question2Test {
 
-	private static final String RX_INVALID_AMOUNT = "(?smiu).*\n?invalid amount.*\n?$";
+	private static final String RX_INVALID = "(?smiu).*\n?invalid.*\n?$";
 
 	@Rule
     public final TextFromStandardInputStream systemInMock= emptyStandardInputStream();
@@ -26,150 +26,56 @@ public class Question2Test {
     
     @Test
     /**
-	 * Ensures the code can handle a 0 to show "invalid amount"
+	 * Ensures the code will show invalid input message
 	 */
-    public void testZeroDollars(){
+    public void testInvalidInput(){
     	exit.expectSystemExit();
-        systemInMock.provideText("0");
+        systemInMock.provideText("One,Two");
     	Question2.main(null);
     	String output = systemOutRule.getLogWithNormalizedLineSeparator();
-        assertThat(output, matchesPattern(RX_INVALID_AMOUNT));
+        assertThat(output, matchesPattern(RX_INVALID));
         System.exit(0);
     }
     
     @Test
     /**
-	 * Ensures the code can handle a negative number to show "invalid amount"
+	 * Tests for handling of integer values
 	 */
-    public void testNegativeAmount()
+    public void testIntegerAverage()
     {
     	exit.expectSystemExit();
-        systemInMock.provideText("-10");
+        systemInMock.provideText("1,2,3");
     	Question2.main(null);
     	String output = systemOutRule.getLogWithNormalizedLineSeparator();
-        assertThat(output, matchesPattern(RX_INVALID_AMOUNT));
+        assertThat(output, matchesPattern("(?smiu).*\n?2.000\n?$"));
         System.exit(0);
     }
     
     @Test
     /**
-	 * Ensures the code can handle a 1 to show One and no cents
+	 * Tests for handling of double values
 	 */
-    public void testOneDollar()
-    {
-        systemInMock.provideText("1");
-    	Question2.main(null);
-    	String output = systemOutRule.getLogWithNormalizedLineSeparator();
-        assertThat(output, matchesPattern("(?smiu).*\n?one and (no|00?) cents\n?$"));
-    }
-    
-    @Test
-    /**
-	 * Ensures the code can handle 1 cent to display 1 cent
-	 */
-    public void testOneCent()
-    {
-        systemInMock.provideText(".01");
-    	Question2.main(null);
-    	String output = systemOutRule.getLogWithNormalizedLineSeparator();
-        assertThat(output, matchesPattern("(?smiu).*\n?0?1 cent\n?$"));
-    }
-    
-    @Test
-    /**
-	 * Ensures the code can handle 99 cents
-	 */
-    public void test99Cents()
-    {
-        systemInMock.provideText(".99");
-    	Question2.main(null);
-    	String output = systemOutRule.getLogWithNormalizedLineSeparator();
-        assertThat(output, matchesPattern("(?smiu).*\n?99 cents\n?$"));
-    }
-    
-    @Test
-    /**
-	 * Ensures the code can handle one hundred dollars
-	 */
-    public void testOneHundredDollars()
-    {
-        systemInMock.provideText("100.00");
-    	Question2.main(null);
-    	String output = systemOutRule.getLogWithNormalizedLineSeparator();
-        assertThat(output, matchesPattern("(?smiu).*\n?one hundred and (no|00?) cents\n?$"));
-    }
-    
-    @Test
-    /**
-	 * Ensures the code can handle one thousand dollars
-	 */
-    public void testOneThousandDollars()
-    {
-        systemInMock.provideText("1000.00");
-    	Question2.main(null);
-    	String output = systemOutRule.getLogWithNormalizedLineSeparator();
-        assertThat(output, matchesPattern("(?smiu).*\n?one thousand and (no|00?) cents\n?$"));
-    }
-	
-    @Test
-    /**
-	 * Ensures the code can handle one million dollars
-	 */
-    public void testOneMillionDollars()
-    {
-        systemInMock.provideText("1000000.00");
-    	Question2.main(null);
-    	String output = systemOutRule.getLogWithNormalizedLineSeparator();
-        assertThat(output, matchesPattern("(?smiu).*\n?one million and (no|00?) cents\n?$"));
-    }
-    
-    @Test
-    /**
-	 * Ensures the code can handle a large number
-	 */
-    public void testALargeNumber()
-    {
-        systemInMock.provideText("901258.25");
-    	Question2.main(null);
-    	String output = systemOutRule.getLogWithNormalizedLineSeparator();
-        assertThat(output, matchesPattern("(?smiu).*\n?nine hundred one thousand two hundred fifty-eight and 25 cents\n?$"));
-    }
-    
-    @Test
-    /**
-	 * Ensures the code can handle a large number with hyphens
-	 */
-    public void testALotOfHyphens()
-    {
-        systemInMock.provideText("31021.99");
-    	Question2.main(null);
-    	String output = systemOutRule.getLogWithNormalizedLineSeparator();
-        assertThat(output, matchesPattern("(?smiu).*\n?thirty-one thousand twenty-one and 99 cents\n?$"));
-    }
-    
-    @Test
-    /**
-	 * Ensures the code can handle invalid input
-	 */
-    public void testNonNumber()
+    public void testDoubleInput()
     {
     	exit.expectSystemExit();
-        systemInMock.provideText("hi");
+        systemInMock.provideText("1,2.5,2.5,6");
     	Question2.main(null);
     	String output = systemOutRule.getLogWithNormalizedLineSeparator();
-    	assertThat(output, matchesPattern(RX_INVALID_AMOUNT));
-    	System.exit(0);
+        assertThat(output, matchesPattern("(?smiu).*\n?3.000\n?$"));
+        System.exit(0);
     }
     
     @Test
     /**
-	 * Ensures the code can handle 0s appended to the end of the cents
+	 * Tests limit to 3 decimal values
 	 */
-    public void testExtraZeroes()
+    public void testLimitToThreeDecimal()
     {
-        systemInMock.provideText("123.23000000");
+    	exit.expectSystemExit();
+        systemInMock.provideText("1,2.5,2.5,6,9,100,2,172.3232,1.41414141414,2.3333333");
     	Question2.main(null);
     	String output = systemOutRule.getLogWithNormalizedLineSeparator();
-    	assertThat(output, matchesPattern("(?smiu).*\n?one hundred twenty-three and 23 cents\n?$"));
+        assertThat(output, matchesPattern("(?smiu).*\n?29.907\n?$"));
+        System.exit(0);
     }
 }

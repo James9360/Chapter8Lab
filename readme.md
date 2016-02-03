@@ -1,5 +1,5 @@
 # Lab #1: Chapter 8
-**Due:** September 15th by 6:30 PM
+**Due:** February 15th by 6:30 PM
 
 ## Question 1: Sentence Capitalizer
 
@@ -7,38 +7,58 @@ Write a method that accepts a String object as an argument and returns a copy of
 
 **Points breakdown**
 
-- Technical: 25 points
-- Style: 10 points
-- Total: 35 points
+- Technical: 15 points
+- Style: 5 points
+- Total: 20 points
 
 -----
-## Question 2: Check Writer
+## Question 2: Average of Numbers in a String
 
-Write a program (in the main method of edu.carrollcc.cis232.Question2) that displays the amount that should be written on a check. The program should ask the user to enter an amount in decimal format. It should then display the amount in English to be written on a check.
+Write a program (in the main method of edu.carrollcc.cis232.Question1) that asks the user to enter a series of numbers separated by commas. 
 
-For example, if the user enters `1920.85`, the program should display:
+Here is an example of valid input:
+`7,9,10,2,18,6.5`
 
-`One thousand nine hundred twenty and 85 cents`
+The program should calculate and display the average of all the numbers out to exactly 3 decimal places.
 
-Another example, if the user enters `100000`, the program should display:
+If the input is invalid, display "invalid input" instead of showing an average value.
 
-`One hundred thousand and no cents`
+**Points breakdown**
 
-If the user enters a `0`, a negative number, a non-number, or more than 2 decimal places the program should display:
+- Technical: 15 points
+- Style: 5 points
+- Total: 20 points
 
-`Invalid amount`
+-----
+## Question 3: Miscellaneous String Operations
 
-Do not ask for another amount if it is invalid.
+Add the following methods to the edu.carrollcc.cis232.Question2 class:
 
-Use [this guide](http://www.eslcafe.com/grammar/saying_large_numbers01.html) for particulars.
+**wordCount** This method should accept a `String` object as an argument and return the number of words contained in the object.  If `null` is passed in, return 0.
 
-The program should work for values up to and including one million.
+**arrayToString** This method accepts a `char` array as an argument and converts it to a `String` object. The method should return a reference to the `String` object. If `null` is passed in, return an empty `String`.
+
+**mostFrequent** This method accepts a `String` object as an argument and returns the `Character` that occurs most frequently in the object.  If `null` is passed in, return `null`.  Return the character in uppercase, ignore case when computing which is the most frequently occuring character.
+
+**replaceSubstring** This method accepts three `String` objects as arguments. Let's call them `string1`, `string2`, and `string3`. It searches `string1` for all occurrences of `string2`. When it finds an occurrence of `string2`, it replaces it with `string3`. For example, suppose the three arguments have the following values:
+
+	string1: "the dog jumped over the fence"
+	string2: "the"
+	string3: "that"
+	
+With these three arguments, the method would return a `String` object with the value "that dog jumped over that fence".
+
+If `null` is passed in for any of the arguments, return `string1`.
+	
+**reverse** This method accepts a `String` object as an argument and returns a String with the letters reversed. If `null` is passed in, return `null`.
+
+Demonstrate each of these methods in a complete program in the Question2 main method.
 
 **Points breakdown**
 
 - Technical: 25 points
-- Style: 10 points
-- Total: 35 points
+- Style: 5 points
+- Total: 30 points
 
 ----
 ### How to submit the lab
@@ -66,7 +86,7 @@ This section outlines how to get the lab on to your computer and how to submit i
 		1. Open the unit test class named Question1Test in the src/test/java folder.
 		2. Press the Play button.
 		3. The failed tests will show up as red on the left. Passed tests will show up as green.
-		4. Repeat the process with Question2Test
+		4. Repeat the process with other Questions
 6. Submit your work
 	1. Right click the project
 	2. Choose Team->Commit...
