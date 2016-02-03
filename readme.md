@@ -79,7 +79,7 @@ This section outlines how to get the lab on to your computer and how to submit i
 	11. Press Finish and your project is imported!
 	12. Right click the project in the package explorer, click Maven->Update Project... (Or press Alt+F5)
 3. Do the actual lab work
-	1. Read/implement the Question1 and Question2 sections above
+	1. Read/implement the Question sections above
 5. Test your work.
 	1. Run the application by pressing the Play button to test your program manually.
 	2. To test your program with the built-in Unit tests: 
